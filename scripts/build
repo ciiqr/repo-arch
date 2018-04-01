@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+src_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
+root_dir="$src_dir/.."
+build_dir="$root_dir/.build"
+
+for repo in monokaiba; do
+	repo_dir="$root_dir/$repo"
+	repo_build_dir="$build_dir/$repo"
+
+	# make sure repo build dir exists
+	mkdir -p "$repo_build_dir"
+
+	# build and save to repo build dir
+	export PKGDEST="$repo_build_dir"
+	export SRCPKGDEST="$repo_build_dir"
+
+	# build each package
+	for pkgbuild_path in "$repo_dir/"*"/PKGBUILD"; do
+		pkg="$(basename "$(dirname "$pkgbuild_path")")"
+		pkg_build_dir="$repo_build_dir/$pkg"
+
+		# make sure pkg build dir exists
+		mkdir -p "$pkg_build_dir"
+
+		# link PKGBUILD
+		ln -sf "$pkgbuild_path" "$pkg_build_dir/PKGBUILD"
+
+		pushd "$pkg_build_dir"
+			# build
+			makepkg -s -c -f
+		popd
+	done
+
+	# create repo
+	repo-add "$repo_build_dir/$repo.db.tar.gz" "$repo_build_dir/"*".pkg.tar.xz"
+done
