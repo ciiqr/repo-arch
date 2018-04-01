@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# TODO: maybe updpkgsums?
+# TODO: namcap *.pkg.tar.xz
+# TODO: namcap PKGBUILD
