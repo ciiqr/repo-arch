@@ -10,8 +10,8 @@
 ```
 ...
 [monokaiba]
-Server = https://github.com/ciiqr/repo-arch/releases/download/current
-# TODO: test SigLevel = PackageOptional
+Server = https://github.com/ciiqr/repo-arch/releases/download/v2018.04.01.19.37.45
+SigLevel = PackageOptional
 ```
 
 ## create
