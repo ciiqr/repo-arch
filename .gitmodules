@@ -67,3 +67,6 @@
 [submodule "monokaiba/qldv"]
 	path = monokaiba/qldv
 	url = https://aur.archlinux.org/qldv.git
+[submodule "monokaiba/spacefm"]
+	path = monokaiba/spacefm
+	url = https://aur.archlinux.org/spacefm.git
