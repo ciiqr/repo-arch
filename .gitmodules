@@ -1,0 +1,69 @@
+[submodule "monokaiba/woof"]
+	path = monokaiba/woof
+	url = https://aur.archlinux.org/woof.git
+[submodule "monokaiba/pkgtools"]
+	path = monokaiba/pkgtools
+	url = https://aur.archlinux.org/pkgtools.git
+[submodule "monokaiba/pssh"]
+	path = monokaiba/pssh
+	url = https://aur.archlinux.org/pssh.git
+[submodule "monokaiba/swift"]
+	path = monokaiba/swift
+	url = https://aur.archlinux.org/swift.git
+[submodule "monokaiba/swift-language"]
+	path = monokaiba/swift-language
+	url = https://aur.archlinux.org/swift-language.git
+[submodule "monokaiba/tailor"]
+	path = monokaiba/tailor
+	url = https://aur.archlinux.org/tailor.git
+[submodule "monokaiba/monodevelop-stable"]
+	path = monokaiba/monodevelop-stable
+	url = https://aur.archlinux.org/monodevelop-stable.git
+[submodule "monokaiba/sublime-text-dev"]
+	path = monokaiba/sublime-text-dev
+	url = https://aur.archlinux.org/sublime-text-dev.git
+[submodule "monokaiba/spotify"]
+	path = monokaiba/spotify
+	url = https://aur.archlinux.org/spotify.git
+[submodule "monokaiba/google-chrome"]
+	path = monokaiba/google-chrome
+	url = https://aur.archlinux.org/google-chrome.git
+[submodule "monokaiba/kpcli"]
+	path = monokaiba/kpcli
+	url = https://aur.archlinux.org/kpcli.git
+[submodule "monokaiba/cwdiff"]
+	path = monokaiba/cwdiff
+	url = https://aur.archlinux.org/cwdiff.git
+[submodule "monokaiba/wdiff"]
+	path = monokaiba/wdiff
+	url = https://aur.archlinux.org/wdiff.git
+[submodule "monokaiba/perl-file-keepass"]
+	path = monokaiba/perl-file-keepass
+	url = https://aur.archlinux.org/perl-file-keepass.git
+[submodule "monokaiba/perl-term-shellui"]
+	path = monokaiba/perl-term-shellui
+	url = https://aur.archlinux.org/perl-term-shellui.git
+[submodule "monokaiba/perl-crypt-rijndael"]
+	path = monokaiba/perl-crypt-rijndael
+	url = https://aur.archlinux.org/perl-crypt-rijndael.git
+[submodule "monokaiba/libblocksruntime"]
+	path = monokaiba/libblocksruntime
+	url = https://aur.archlinux.org/libblocksruntime.git
+[submodule "monokaiba/fsharp"]
+	path = monokaiba/fsharp
+	url = https://aur.archlinux.org/fsharp.git
+[submodule "monokaiba/msbuild-stable"]
+	path = monokaiba/msbuild-stable
+	url = https://aur.archlinux.org/msbuild-stable.git
+[submodule "monokaiba/swift-bin"]
+	path = monokaiba/swift-bin
+	url = https://aur.archlinux.org/swift-bin.git
+[submodule "monokaiba/icu55"]
+	path = monokaiba/icu55
+	url = https://aur.archlinux.org/icu55.git
+[submodule "monokaiba/ncurses5-compat-libs"]
+	path = monokaiba/ncurses5-compat-libs
+	url = https://aur.archlinux.org/ncurses5-compat-libs.git
+[submodule "monokaiba/qldv"]
+	path = monokaiba/qldv
+	url = https://aur.archlinux.org/qldv.git

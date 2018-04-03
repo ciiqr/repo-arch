@@ -1,8 +1,48 @@
 #!/usr/bin/env bash
 
+separator()
+{
+	printf '=''%.0s' $(seq "$columns")
+}
+
+progress()
+{
+	declare PS_BOLD="$(tput bold)"
+	declare PS_FG_BLUE="$(tput setaf 4)"
+	declare PS_RESET="$(tput sgr0)"
+	echo "${PS_FG_BLUE}$(separator)${PS_RESET}"
+	echo "${PS_FG_BLUE}==> ${PS_RESET}${PS_BOLD}$@${PS_RESET}"
+}
+
+quiet_makepkg()
+{
+	makepkg "$@";return $?
+	declare out=`mktemp`
+	declare ret=0
+
+	if ! makepkg "$@" </dev/null >"$out" 2>&1; then
+		if grep -q 'ERROR: A package has already been built.' "$out"; then
+			: # ugh
+		else
+			ret=1
+			cat "$out" >&2
+		fi
+	fi
+
+	rm -f "$out"
+	return "$ret"
+}
+
+quiet_repo_add()
+{
+	repo-add -q "$@" 2>&1 | egrep -v "An entry for '.*' already existed"
+}
+
 src_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 root_dir="$src_dir/.."
 build_dir="$root_dir/.build"
+
+columns=$(tput cols)
 
 for repo in monokaiba; do
 	repo_dir="$root_dir/$repo"
@@ -17,21 +57,29 @@ for repo in monokaiba; do
 
 	# build each package
 	for pkgbuild_path in "$repo_dir/"*"/PKGBUILD"; do
-		pkg="$(basename "$(dirname "$pkgbuild_path")")"
+		pkg_dir="$(dirname "$pkgbuild_path")"
+		pkg="$(basename "$pkg_dir")"
 		pkg_build_dir="$repo_build_dir/$pkg"
+
+		progress "build: $repo - $pkg"
 
 		# make sure pkg build dir exists
 		mkdir -p "$pkg_build_dir"
 
-		# link PKGBUILD
-		ln -sf "$pkgbuild_path" "$pkg_build_dir/PKGBUILD"
+		# sync all files to build dir
+		# TODO: might want to add --delete back, but it's useful when not using -c flag of makepkg, and that is useful because it might speed things up...
+		rsync -ra "$pkg_dir/" "$pkg_build_dir"
 
-		pushd "$pkg_build_dir"
+		pushd "$pkg_build_dir" >/dev/null
 			# build
-			makepkg -s -c -f
-		popd
+			quiet_makepkg -s --noconfirm
+		popd >/dev/null
 	done
 
+	progress "build: $repo"
+
 	# create repo
-	repo-add "$repo_build_dir/$repo.db.tar.gz" "$repo_build_dir/"*".pkg.tar.xz"
+	quiet_repo_add "$repo_build_dir/$repo.db.tar.gz" "$repo_build_dir/"*".pkg.tar.xz"
 done
+
+# TODO: generate .SRCINFO? https://wiki.archlinux.org/index.php/.SRCINFO
