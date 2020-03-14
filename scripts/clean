@@ -4,5 +4,5 @@ src_dir="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 build_dir="$src_dir/../.build"
 
 if [[ -d "$build_dir" ]]; then
-	rm -r "$build_dir"
+    rm -r "$build_dir"
 fi

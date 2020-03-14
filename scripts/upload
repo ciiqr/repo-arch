@@ -6,16 +6,16 @@ build_dir="$root_dir/.build"
 
 # required commands
 for cmd in hub; do
-	if ! type "$cmd" >/dev/null 2>&1; then
-		echo "$0: $cmd command is required"
-		exit 1
-	fi
+    if ! type "$cmd" >/dev/null 2>&1; then
+        echo "$0: $cmd command is required"
+        exit 1
+    fi
 done
 
 # build dir must exist
 if [[ ! -d "$build_dir" ]]; then
-	echo "$0: $build_dir doesn't exist"
-	exit 1
+    echo "$0: $build_dir doesn't exist"
+    exit 1
 fi
 
 tag="v$(date '+%Y.%m.%d.%H.%M.%S')"
@@ -25,7 +25,7 @@ tag="v$(date '+%Y.%m.%d.%H.%M.%S')"
 # Create release
 files_cmd=()
 for file in "$build_dir/"*/*{.db,.db.tar.gz,.files,.files.tar.gz,.pkg.tar.xz}; do
-	files_cmd+=('-a')
-	files_cmd+=("$file")
+    files_cmd+=('-a')
+    files_cmd+=("$file")
 done
 hub release create "${files_cmd[@]}" -m "build - $tag" "$tag"
